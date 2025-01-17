@@ -8,6 +8,7 @@
 
 /* 全局样式 */
 body {
+    overflow: hidden; /* 禁止页面滚动条 */
     font-family: 'ZCOOLKuaiLe', sans-serif;
     display: flex;
     justify-content: center;
@@ -145,7 +146,7 @@ input::placeholder {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 200px;
+    max-height: 150px;
     z-index: 1000;
     list-style: none;
     margin: 0;
@@ -262,6 +263,57 @@ input::placeholder {
 
 }
 
+
+/* 超大GIF图片样式 */
+.angry-pig {
+    width: 20%; /* 控制GIF的大小 */
+    height: auto;
+    margin-top: 50px;
+    animation: shake 0.3s ease-in-out infinite, zoom 0.5s ease-in-out infinite; /* 同时应用抖动和放大缩小效果 */
+}
+
+/* 定义快速抖动动画 */
+@keyframes shake {
+    0% {
+        transform: translateX(0); /* 初始位置 */
+
+    }
+    25% {
+        transform: translateX(-10px); /* 向左偏移 */
+
+    }
+    50% {
+        transform: translateX(10px); /* 向右偏移 */
+
+    }
+    75% {
+        transform: translateX(-10px); /* 向左偏移 */
+
+    }
+    100% {
+        transform: translateX(0); /* 恢复到初始位置 */
+    }
+}
+
+/* 定义放大缩小动画 */
+@keyframes zoom {
+    0% {
+        transform: scale(2); /* 初始大小 */
+    }
+    25% {
+        transform: scale(2.2); /* 放大 */
+    }
+    50% {
+        transform: scale(1.6); /* 缩小 */
+    }
+    75% {
+        transform: scale(2.2); /* 再放大 */
+    }
+    100% {
+        transform: scale(2); /* 恢复到初始大小 */
+    }
+}
+
 /* 消息容器样式 */
 .result-message-container {
     background: linear-gradient(135deg, #fff5e1, #ffd6e6); /* 背景渐变 */
@@ -298,6 +350,28 @@ input::placeholder {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease;
 }
 
+
+/* 右上角的返回按钮 */
+.back-btn-right {
+    position: fixed; /* 固定定位 */
+    top: 2rem; /* 距离页面顶部 1rem */
+    right: 2rem; /* 距离页面右侧 1rem */
+    background: #ff69b4;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 25px;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* 阴影 */
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    text-decoration: none; /* 去掉下划线 */
+}
+
+.back-btn-right:hover {
+    background-color: #ff85c4; /* 鼠标悬停时的背景色 */
+    transform: scale(1.05); /* 鼠标悬停时放大 */
+}
+
 .back-btn:hover {
     background: #ff85c4; /* 鼠标悬停变色 */
     transform: scale(1.05); /* 鼠标悬停放大 */
@@ -306,7 +380,7 @@ input::placeholder {
 
 /* 生日祝福部分 */
 #birthday-message {
-    display: none; /* 默认隐藏，JavaScript 控制显示 */
+    display: inline-block; /* 默认隐藏，JavaScript 控制显示 */
     position: fixed; /* 固定在视口内 */
     top: -30%; /* 垂直居中 */
     left: 10%; /* 水平居中 */
@@ -435,12 +509,15 @@ input::placeholder {
 
 /* 页面标题样式 */
 .pigmeme-title {
+    position: sticky; /* 固定位置 */
+    top: 0; /* 保证始终在顶部 */
     font-size: 2.5rem;
     color: #ff69b4; /* 粉红色 */
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* 给标题本身留出底部空间 */
+    z-index: 1000; /* 保证标题在最上层 */
+    /*background-color: white; !* 添加背景色防止遮挡 *!*/
 }
-
 
 /* GIF 图片展示区 */
 .gif-gallery {
@@ -450,17 +527,22 @@ input::placeholder {
     padding: 20px;
     max-width: 1000px;
     width: 100%;
+    overflow-y: auto;
+    margin-top: 60px; /* 给 .gif-gallery 添加与标题之间的距离，防止和标题重叠 */
+    height: calc(100vh - 100px); /* 给页面加足够的高度，确保滚动 */
 }
 
 /* 每个 GIF 图片项 */
 .gif-item {
     cursor: pointer;
+    margin-bottom: 10px;
     transition: transform 0.2s ease;
 }
 
 .gif-item:hover {
     transform: scale(1.05);
 }
+
 
 /* 缩略图样式 */
 .gif-thumbnail {
@@ -527,11 +609,146 @@ input::placeholder {
     background-color: #ff85c4;
 }
 
-/* 懒加载图片样式 */
-.lazy-load {
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+
+/* 小猪投票页面 */
+
+/* 投票页面容器 */
+.vote-page-container {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
-.lazy-load-loaded {
-    opacity: 1;
+
+/* 页面标题样式 */
+.vote-page-title {
+    font-size: 2.5rem;
+    color: #ff69b4; /* 粉红色 */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 投票结果展示区 */
+.vote-results {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap; /* 支持换行 */
+    margin-top: 20px;
+}
+
+/* 单个角色的投票结果展示 */
+.vote-result {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 200px; /* 固定宽度 */
+    text-align: center;
+}
+
+.vote-result h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.vote-result p {
+    font-size: 1.2rem;
+    color: #ff69b4; /* 粉红色 */
+}
+
+/* 投票按钮 */
+.vote-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* 投票按钮样式 */
+.vote-button button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.vote-button button:hover {
+    background-color: #ff85c4;
+}
+
+/* 投票选项弹窗 */
+.vote-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.vote-option {
+    cursor: pointer;
+    text-align: center;
+}
+
+.vote-option img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+/* 弹窗背景 */
+.vote-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.vote-modal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff69b4;
+}
+
+/* 反对提示框样式 */
+.dislike-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(253, 185, 225);
+    padding: 20px;
+    color: #534e4e;
+    text-align: center;
+    border-radius: 10px;
+    border-color: rgba(195, 11, 81, 0.9);
+    z-index: 1000;
+}
+
+.dislike-gif {
+    width: 200px;
+    margin-top: 20px;
 }

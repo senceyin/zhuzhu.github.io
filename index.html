@@ -53,8 +53,8 @@
     <div id="birthday-message"
          @animationend="handleAnimationEnd"
          v-show="isMessageVisible">
-        <h1>🎉 恭喜你！生日快乐 🎂</h1>
-        <p>愿你的每一天都充满幸福和快乐！</p>
+        <h1>🎉 最可爱的猪猪！24岁生日快乐 🎂</h1>
+        <p>愿你的每一天都和肥肥一起充满幸福和快乐！</p>
         <img src="assets/pig-touch.gif" alt="生日祝福" class="birthday-gif">
     </div>
 </div>
@@ -62,12 +62,12 @@
 <!-- 第二个 Vue 实例控制按钮和天数卡片 -->
 <div id="button-container">
     <button id="days-button" class="gif-button" @click="toggleDaysCard">
-        <img src="assets/pig-nose.webp" alt="查看天数">
+        <img src="assets/pig-love.gif" alt="查看天数">
     </button>
 
     <div id="days-card" class="card" v-if="isDaysCardVisible">
-        <h2>我们已经在一起的天数</h2>
-        <p>{{ calculateDaysTogether() }} 天 ❤️</p>
+        <h2>我们已经在一起</h2>
+        <p>{{ calculateDaysTogether() }} 天啦 ❤️</p>
     </div>
 </div>
 

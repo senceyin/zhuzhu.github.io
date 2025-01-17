@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猪猪最喜欢的是谁</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app" class="vote-page-container">
+    <!-- 页面标题 -->
+    <div class="header">
+        <img src="assets/pig-pigulove.gif" alt="icon" class="icon">
+        <h1 class="vote-page-title">猪猪最喜欢的是谁？</h1>
+    </div>
+    <!-- 投票结果展示 -->
+    <div class="vote-results">
+        <div v-for="(result, name) in voteResults" :key="name" class="vote-result">
+            <h3>{{ name }}</h3><img :src="characters[name].imageUrl" alt="icon" class="icon" />
+            <p>赞同票数: {{ result.approve }}</p>
+            <p>反对票数: {{ result.disapprove }}</p>
+
+            <!-- 投票按钮 -->
+            <div class="vote-button">
+                <button @click="openVoteModal(name)">投票</button>
+            </div>
+        </div>
+    </div>
+    <button @click="resetVoteResults">重置投票结果</button>
+
+
+    <div v-if="showDislikeMessage" class="dislike-message">
+        <p>没有人可以反对猪猪大王！</p>
+        <img src="assets/pig-reject.gif" alt="反对提示" class="dislike-gif" />
+    </div>
+
+
+    <!-- 投票选项弹窗 -->
+    <div v-if="showVoteModal" class="vote-modal">
+        <div class="modal-content">
+            <span class="close-btn" @click="closeVoteModal">&times;</span>
+            <div class="vote-options">
+                <div class="vote-option" @click="castVote('approve')">
+                    <img src="assets/pig-dianzan.gif" alt="点赞" />
+                    <p>点赞</p>
+                </div>
+                <div class="vote-option" @click="castVote('disapprove')">
+                    <img src="assets/pig-diancai.gif" alt="点踩" />
+                    <p>点踩</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-btn-right">返回首页</a>
+
+</div>
+
+<script src="js/pigFavoriteVote.js"></script>
+</body>
+</html>

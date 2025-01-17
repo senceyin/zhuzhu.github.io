@@ -15,23 +15,19 @@ createApp({
             startDate: new Date("2023-09-17"), // 起始日期
             suggestionsMapping: [ // 预设的搜索建议列表
                 '猪猪可以上班吗',
-                '猪猪更喜欢果冻牛还是大小🥚',
+                '猪猪是小肥奴吗',
                 '猪猪最喜欢的是肥肥',
                 '猪猪表情包合集',
-                '猪猪是小肥奴吗',
-                '小猪在哪里？',
-                '小猪的最爱是什么？',
-                '小猪可以吃糖果吗？',
-                '肥肥是最可爱的！',
-                '肥肥和猪猪的故事',
-                '肥肥最喜欢的颜色是什么？'
+                '猪猪最爱的是肥还是牛还是🥚',
+                '肥肥和猪猪的故事'
+
             ],
             searchMapping: { // 搜索关键词与对应跳转页面的映射
                 '猪猪可以上班吗': 'pigpigwork.html',
-                '猪猪更喜欢果冻牛还是大小🥚': 'niuegg.html',
-                '猪猪最喜欢的是肥肥': 'lovefatfirst.html',
-                '猪猪表情包合集': 'pig-memes.html',
                 '猪猪是小肥奴吗': 'pig-slave.html',
+                '猪猪最喜欢的是肥肥': 'pig-love-who-first.html',
+                '猪猪表情包合集': 'pig-memes.html',
+                '猪猪最爱的是肥还是牛还是🥚！': 'pig-love-who-first.html',
                 '小猪在哪里？': 'little-pig-location.html',
                 '小猪的最爱是什么？': 'ittle-pig-love.html',
                 '肥肥是最可爱的！': 'fatfat-cute.html',
