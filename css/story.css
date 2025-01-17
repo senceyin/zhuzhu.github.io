@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'ZCOOLKuaiLe'; /* 给字体起一个名字 */
-    src: url('../font/站酷快乐体2016修订版.ttf') format('truetype'); /* 引入字体文件 */
+    src: url('https://github.com/senceyin/zhuzhu.github.io/blob/558529f0909ef6a96b74da8203049c7ce98b6935/font/%E7%AB%99%E9%85%B7%E5%BF%AB%E4%B9%90%E4%BD%932016%E4%BF%AE%E8%AE%A2%E7%89%88.ttf') format('truetype'); /* 引入字体文件 */
     font-weight: normal; /* 正常字体 */
     font-style: normal;  /* 正常样式 */
 }
