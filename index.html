@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱猪网</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <!-- 头部标题 -->
+    <div class="header">
+        <img src="/assets/pig-nose.webp" alt="icon" class="icon">
+        <h1 class="title">百猪一下
+
+        </h1>
+    </div>
+
+    <!-- 搜索框 -->
+    <div class="search-box">
+        <input
+                type="text"
+                v-model="query"
+                placeholder="请输入想搜索的猪猪肥肥"
+                @focus="handleFocus"
+                @keydown.enter="handleEnter"
+        >
+        <button class="btn pig-btn" @click="handlePigSearch">
+            <img src="assets/pig-head1.gif" alt="猪" class="icon">
+            <img src="assets/pig-head2.gif" alt="猪" class="icon">
+            🔍
+        </button>
+        <button class="btn normal-btn" @click="handleNormalSearch">普通🔍</button>
+    </div>
+
+    <!-- 下拉建议框 -->
+    <ul class="suggestions" v-if="filteredSuggestions.length">
+        <li
+                v-for="(suggestion, index) in filteredSuggestions"
+                :key="index"
+                @click="selectSuggestion(suggestion)"
+                v-html="highlightMatch(suggestion)"
+        ></li>
+    </ul>
+
+    <!-- 提示框 -->
+    <div id="alertBox" class="alert-box" v-if="alertMessage">
+        <span v-html="alertMessage"></span>
+    </div>
+
+    <div id="birthday-message"
+         @animationend="handleAnimationEnd"
+         v-show="isMessageVisible">
+        <h1>🎉 恭喜你！生日快乐 🎂</h1>
+        <p>愿你的每一天都充满幸福和快乐！</p>
+        <img src="assets/pig-touch.gif" alt="生日祝福" class="birthday-gif">
+    </div>
+</div>
+
+<!-- 第二个 Vue 实例控制按钮和天数卡片 -->
+<div id="button-container">
+    <button id="days-button" class="gif-button" @click="toggleDaysCard">
+        <img src="assets/pig-nose.webp" alt="查看天数">
+    </button>
+
+    <div id="days-card" class="card" v-if="isDaysCardVisible">
+        <h2>我们已经在一起的天数</h2>
+        <p>{{ calculateDaysTogether() }} 天 ❤️</p>
+    </div>
+</div>
+
+
+
+
+
+<script src="js/script.js"></script>
+</body>
+</html>

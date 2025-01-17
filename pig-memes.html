@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猪猪表情包</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+
+<div id="app" class="gif-gallery">
+    <!-- 动态渲染GIF图片 -->
+    <div v-for="gif in gifs" :key="gif.id" class="gif-item" @click="openModal(gif)">
+        <!-- 直接使用 src 属性加载图片，不使用懒加载 -->
+        <img :src="gif.url" :alt="gif.name" class="gif-thumbnail" />
+    </div>
+
+
+    <!-- 弹窗：显示放大后的 GIF 图片和下载按钮 -->
+    <div id="gif-modal" class="gif-modal" v-if="modalVisible">
+        <div class="modal-content">
+            <span class="close-btn" @click="closeModal">&times;</span>
+            <img :src="modalGif.url" alt="放大后的gif" class="modal-gif" />
+            <a :href="modalGif.url" download :download="modalGif.name" class="download-btn">下载</a>
+        </div>
+    </div>
+</div>
+
+<script src="/js/pigmemes.js"></script>
+</body>
+</html>
