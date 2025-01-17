@@ -423,6 +423,25 @@ input::placeholder {
 
 
 /* 猪猪表情包的css */
+
+/* 全局容器样式 */
+.pig-memecontainer {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /*background: #ffffff;*/
+}
+
+/* 页面标题样式 */
+.pigmeme-title {
+    font-size: 2.5rem;
+    color: #ff69b4; /* 粉红色 */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
 /* GIF 图片展示区 */
 .gif-gallery {
     display: grid;
