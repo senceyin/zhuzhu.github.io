@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猪猪食谱</title>
+    <link rel="stylesheet" href="css/pigfood.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+<div id="app" class="container">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <h2>选择年份</h2>
+        <div class="year-list">
+            <button v-for="year in years" :key="year" @click="selectYear(year)">
+                {{ year }}
+            </button>
+        </div>
+        <h3>选择月份</h3>
+        <div class="month-list">
+            <button v-for="month in months" :key="month" @click="selectMonth(month)">
+                {{ month }}
+            </button>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="recipe-list">
+        <div class="recipe-item" v-for="recipe in filteredRecipes" :key="recipe.id">
+            <h3>{{ recipe.name }}</h3>
+            <p>{{ recipe.date }}</p>
+            <img :src="recipe.photo" :alt="recipe.name" class="recipe-photo" />
+            <ul>
+                <li v-for="ingredient in recipe.ingredients" :key="ingredient">{{ ingredient }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="js/pigfood.js"></script>
+</body>
+</html>
