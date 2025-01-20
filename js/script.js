@@ -4,7 +4,11 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            isMessageVisible: true,// 控制消息显示
+            showPasswordDialog: true,  // 控制口令框显示
+            passwordInput: '',         // 用户输入的口令
+            passwordError: false,      // 口令错误提示
+            isMessageVisible: false,   // 控制生日祝福框显示
+
             query: '', // 搜索框中的用户输入
             alertMessage: '', // 当前提示框显示的消息
             alertQueue: [], // 提示消息的队列，用于处理多个连续的提示
@@ -37,6 +41,14 @@ createApp({
             }
         };
     },
+
+    created() {
+        // 页面加载时检查是否已经通过口令验证
+        if (localStorage.getItem('isPasswordChecked') === 'true') {
+            this.showPasswordDialog = false;  // 如果通过口令验证，关闭口令框
+        }
+
+    },
     computed: {
         // 计算属性：根据用户输入动态过滤建议列表
         filteredSuggestions() {
@@ -49,6 +61,11 @@ createApp({
         }
     },
     methods: {
+
+        closeMessage() {
+            this.isMessageVisible = false; // 关闭消息
+        },
+
         handleAnimationEnd(event) {
             // 检查是否是 fadeOut 动画结束
             if (event.animationName === "fadeOut") {
@@ -81,11 +98,7 @@ createApp({
         },
         // 按下回车键时触发
         handleEnter() {
-
-            // 如果输入内容包含“猪猪”，则跳转到特定页面
-            if (this.query?.includes('猪猪')) {
-                window.location.href = 'pigpigwork.html';
-            }
+            this.handlePigSearch()
         },
         showAlert(message) {
             console.log('Message pushed to queue:', message);
@@ -98,11 +111,6 @@ createApp({
         startProcessingQueue() {
             // 如果正在处理队列，就直接返回，避免重复处理\
             console.log('alertTimer:', this.alertTimer);
-            // if (this.alertTimer) {
-            //     // return
-            //     clearTimeout(this.alertTimer); // 清除当前定时器
-            // }
-
             this.processAlertQueue(); // 开始处理队列
         },
 
@@ -120,10 +128,6 @@ createApp({
 
         // 点击“猪猪搜索”按钮触发
         handlePigSearch() {
-            debugger
-            // debugger
-            // if (this.isSearch) return; // 如果按钮已点击，直接返回
-
             this.isSearcButtonClick = true; // 标记按钮已被点击
             setTimeout(() => {
                 this.isSearcButtonClick = false; // 1 秒后重置按钮状态
@@ -141,10 +145,28 @@ createApp({
             }
         },
 
+        clearPasswordStatus() {
+            localStorage.removeItem('isPasswordChecked');
+        },
+
+
+        checkPassword() {
+            const correctPassword = '就想和你玩';  // 正确口令
+            if (this.passwordInput === correctPassword) {
+                // 输入正确，隐藏口令框并显示生日祝福框
+                this.showPasswordDialog = false;
+                buttonApp.isGifButtonVisible = true;
+                this.isMessageVisible = true;  // 显示生日祝福框
+                this.passwordError = false;   // 清除错误提示
+                localStorage.setItem('isPasswordChecked', 'true');
+            } else {
+                // 输入错误，显示错误提示
+                this.passwordError = true;
+            }
+        },
+
         // 点击“普通搜索”按钮触发
         handleNormalSearch() {
-
-
             this.isSearcButtonClick = true;
             setTimeout(() => {
                 this.isSearcButtonClick = false;
@@ -167,6 +189,7 @@ const buttonApp = createApp({
     data() {
         return {
             isDaysCardVisible: false,
+            isGifButtonVisible: false,
             startDate: new Date("2023-09-17"),
         };
     },
@@ -180,6 +203,5 @@ const buttonApp = createApp({
         }
     }
 }).mount('#button-container'); // 挂载到页面上的 #button-container 容器
-
 
 

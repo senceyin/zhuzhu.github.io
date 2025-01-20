@@ -9,13 +9,32 @@
     <script src="https://unpkg.com/vue@3"></script>
 </head>
 <body>
+
+
+
+
+
 <div id="app" class="container">
     <!-- 头部标题 -->
     <div class="header">
-        <img src="assets/pig-nose.webp" alt="icon" class="icon">
-        <h1 class="title">百猪一下
+        <img src="assets/pig-nose.webp" alt="icon" class="icon" @click="clearPasswordStatus">
+        <h1 class="title">百猪一下</h1>
+    </div>
 
-        </h1>
+    <!-- 口令框 -->
+    <div v-if="showPasswordDialog" class="password-dialog">
+        <div class="dialog-content">
+            <h2>口令框</h2>
+            <p>提示语：等你很久了！</p>
+            <input
+                    type="text"
+                    v-model="passwordInput"
+                    placeholder="请输入口令"
+                    @keydown.enter="checkPassword"
+            >
+            <button @click="checkPassword">提交</button>
+            <p v-if="passwordError" style="color: red;">请再试试！</p>
+        </div>
     </div>
 
     <!-- 搜索框 -->
@@ -50,18 +69,20 @@
         <span v-html="alertMessage"></span>
     </div>
 
-    <div id="birthday-message"
-         @animationend="handleAnimationEnd"
-         v-show="isMessageVisible">
+    <!-- 生日祝福部分 -->
+    <div id="birthday-message" v-show="isMessageVisible">
+        <button class="close-button" @click="closeMessage">✖</button>
         <h1>🎉 最可爱的猪猪！24岁生日快乐 🎂</h1>
         <p>愿你的每一天都和肥肥一起充满幸福和快乐！</p>
         <img src="assets/pig-touch.gif" alt="生日祝福" class="birthday-gif">
     </div>
 </div>
 
+
+
 <!-- 第二个 Vue 实例控制按钮和天数卡片 -->
 <div id="button-container">
-    <button id="days-button" class="gif-button" @click="toggleDaysCard">
+    <button id="days-button" class="gif-button" @click="toggleDaysCard" v-show="isGifButtonVisible">
         <img src="assets/pig-love.gif" alt="查看天数">
     </button>
 

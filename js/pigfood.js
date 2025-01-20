@@ -38,7 +38,7 @@ createApp({
                     date: "2025-03-15",
                     photo: "assets/recipes/pighotpot.jpg",
                     ingredients: ["火锅底料", "牛肉", "羊肉", "蔬菜"],
-                    year: 2025,
+                    year: 2024,
                     month: 3,
                 },
                 {

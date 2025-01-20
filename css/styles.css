@@ -383,13 +383,13 @@ input::placeholder {
     display: inline-block; /* 默认隐藏，JavaScript 控制显示 */
     position: fixed; /* 固定在视口内 */
     top: -30%; /* 垂直居中 */
-    left: 10%; /* 水平居中 */
+    left: 0%; /* 水平居中 */
     /*transform: translate(-50%, -50%); !* 使其完全居中 *!*/
     background: rgba(255, 255, 255, 0.9); /* 半透明背景，突出内容 */
     padding: 20px 40px; /* 内边距 */
     border-radius: 15px; /* 圆角 */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
-    z-index: 9999; /* 确保处于最上方 */
+    z-index: 9998; /* 确保处于最上方 */
     /*display: none; !* 默认隐藏，动态显示 *!*/
     text-align: center; /* 内容居中对齐 */
     animation: fadeIn 2s ease-in-out, fadeOut 5s ease-in 5s; /* 显示时淡入动画 */
@@ -408,12 +408,29 @@ input::placeholder {
     margin: 10px 0; /* 上下间距 */
 }
 
+#birthday-message .close-button {
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 离顶部 10px */
+    right: 10px; /* 离右边 10px */
+    background: none; /* 无背景 */
+    border: none; /* 无边框 */
+    color: #ff66b2; /* 按钮颜色 */
+    font-size: 20px; /* 按钮字体大小 */
+    cursor: pointer; /* 鼠标指针为点击手型 */
+    transition: transform 0.2s ease; /* 添加过渡效果 */
+}
+
+#birthday-message .close-button:hover {
+    transform: scale(1.1); /* 鼠标悬停时放大按钮 */
+}
+
 /* 祝福 GIF 图片 */
 .birthday-gif {
     width: 200px; /* 图片大小 */
     margin-top: 20px; /* 与文字分隔 */
     border-radius: 10px; /* 圆角效果 */
 }
+
 
 
 /* GIF 按钮样式 */
@@ -426,7 +443,7 @@ input::placeholder {
     cursor: pointer; /* 鼠标指针为点击手型 */
     outline: none; /* 移除聚焦时的外边框 */
     transition: transform 0.2s; /* 添加过渡效果 */
-    z-index: 9999; /* 确保按钮在最上层 */
+    z-index: 9998; /* 确保按钮在最上层 */
 }
 .gif-button img {
     width: 50px;
@@ -444,7 +461,7 @@ input::placeholder {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: fixed;
-    bottom: 300px;
+    top: 120px; /* 确保卡片在按钮下方 100px */
     right: 20px;
     text-align: center;
     animation: popInGif 0.5s ease-out, fadeOutGif  2.5s ease-in 0.5s forwards;
@@ -751,6 +768,48 @@ input::placeholder {
 .dislike-gif {
     width: 200px;
     margin-top: 20px;
+}
+
+
+
+
+/* 口令框样式 */
+.password-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: #f8a2d2;
+    font-family: Arial, sans-serif;
+}
+
+.dialog-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 400px;
+}
+
+#password-input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ff66b2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
